@@ -1047,6 +1047,11 @@ public class UdfpsController implements DozeReceiver, Dumpable {
     private void showUdfpsOverlay(@NonNull UdfpsControllerOverlay overlay) {
         mExecution.assertIsMainThread();
 
+        View viewRoot = (mOverlay != null && mOverlay.getTouchOverlay() != null) ? mOverlay.getTouchOverlay().getRootView() : null;
+        if (viewRoot != null) {
+            viewRoot.getViewRootImpl().notifyRendererOfExpensiveFrame();
+        }
+
         mOverlay = overlay;
         final int requestReason = overlay.getRequestReason();
 
@@ -1071,6 +1076,9 @@ public class UdfpsController implements DozeReceiver, Dumpable {
             }
         } else {
             Log.v(TAG, "showUdfpsOverlay | the overlay is already showing");
+        }
+        if (viewRoot != null) {
+            viewRoot.getViewRootImpl().notifyRendererOfExpensiveFrame();
         }
     }
 
