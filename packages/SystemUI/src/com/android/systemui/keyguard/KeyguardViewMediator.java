@@ -79,6 +79,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.Trace;
 import android.os.UserHandle;
@@ -2891,6 +2892,16 @@ public class KeyguardViewMediator implements CoreStartable, Dumpable,
 
         scheduleNonStrongBiometricIdleTimeout();
 
+        // Delay garbage collection until display is shown
+        mHandler.postDelayed(() -> {
+            final int oldMask = StrictMode.getThreadPolicyMask();
+            StrictMode.setThreadPolicyMask(0);
+            System.gc();
+            System.runFinalization();
+            System.gc();
+            StrictMode.setThreadPolicyMask(oldMask);
+        }, 2500);
+            
         Trace.endSection();
     }
 
