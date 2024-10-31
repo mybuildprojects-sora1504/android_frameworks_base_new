@@ -77,8 +77,7 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         super(context, attrs, defStyleAttr, defStyleRes);
         mMinImageHeight = context.getResources().getDimensionPixelSize(
                 com.android.internal.R.dimen.messaging_image_min_size);
-        mMaxImageHeight = context.getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.messaging_image_max_height);
+        mMaxImageHeight = 500;
         mImageRounding = context.getResources().getDimensionPixelSize(
                 com.android.internal.R.dimen.messaging_image_rounding);
         mExtraSpacing = context.getResources().getDimensionPixelSize(

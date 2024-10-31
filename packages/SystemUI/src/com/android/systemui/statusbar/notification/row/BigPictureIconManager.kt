@@ -211,23 +211,9 @@ constructor(
         return ActivityManager.isLowRamDeviceStatic()
     }
 
-    private fun getMaxWidth() =
-        context.resources.getDimensionPixelSize(
-            if (isLowRam()) {
-                R.dimen.notification_big_picture_max_width_low_ram
-            } else {
-                R.dimen.notification_big_picture_max_width
-            }
-        )
+    private fun getMaxWidth() = 500
 
-    private fun getMaxHeight() =
-        context.resources.getDimensionPixelSize(
-            if (isLowRam()) {
-                R.dimen.notification_big_picture_max_height_low_ram
-            } else {
-                R.dimen.notification_big_picture_max_height
-            }
-        )
+    private fun getMaxHeight() = 500
 
     /**
      * We don't support lazy-loading or set placeholders for bitmap and data based icons, because
